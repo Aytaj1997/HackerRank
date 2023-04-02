@@ -1,0 +1,5 @@
+select case when Grade >= 8 then Name
+       else Null end Name, 
+       Grade, Marks from Students
+left join Grades on Students.Marks between Grades.Min_Mark and Grades.Max_Mark
+order by Grade desc, Name, Marks;
