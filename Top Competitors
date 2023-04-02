@@ -1,0 +1,8 @@
+select hacker_id, name from Submissions 
+left join Challenges on Submissions.challenge_id=Challenges.challenge_id
+left join Difficulty on Challenges.difficulty_level=Difficulty.difficulty_level
+left join Hackers on Submissions.hacker_id=Hackers.hacker_id
+where Submissions.score=Difficulty.score
+group by hacker_id, name
+having count(*)>1
+order by count(*) desc, hacker_id;
