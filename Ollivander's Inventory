@@ -1,0 +1,8 @@
+select id, age, coins_needed, power from 
+(select id, age, coins_needed, power, 
+        min(coins_needed) over(partition by age, power) min_coins 
+ from Wands
+ left join Wands_Property on Wands.code=Wands_Property.code
+ where is_evil=0) 
+where coins_needed=min_coins
+order by power desc, age desc;
