@@ -1,0 +1,5 @@
+select Doctor, Professor, Singer, Actor 
+from (select Name, Occupation, row_number() over(partition by Occupation order by Name) row_number from Occupations)
+pivot(
+max(Name) for Occupation in ('Doctor' Doctor, 'Professor' Professor, 'Singer' Singer, 'Actor' Actor))
+order by row_number;
